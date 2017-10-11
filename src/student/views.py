@@ -10,8 +10,8 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from mixins.mixins import UserChangeManagerMixin
-from billing.models import UserCredit, StudentBISubscription
-from billing.control import creditstart
+# from billing.models import UserCredit, StudentBISubscription
+# from billing.control import creditstart
 import datetime
 
 class StudentDetail(UserChangeManagerMixin,DetailView):

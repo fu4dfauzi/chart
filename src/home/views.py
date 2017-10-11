@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, View
 from teacher.models import Teacher
 from student.models import Student
 from opening.models import Opening
-from billing.models import UserCredit, ImageSubscription, FeaturedUser_0, FeaturedUser_1, AnalyticsSubscription, StudentBISubscription
+# from billing.models import UserCredit, ImageSubscription, FeaturedUser_0, FeaturedUser_1, AnalyticsSubscription, StudentBISubscription
 from tags.models import FavTeacher, FavOpening, ViewTeacherUnique, ViewOpening, ViewTeacherNonUnique
 from home.forms import ContactForm
 from django.db.models import Count
@@ -77,29 +77,29 @@ class HomeView(TemplateView):
 				user = self.request.user
 
 				#retrieve the number of credits the user has
-				usercred_obj = get_object_or_404(UserCredit, user=user)
-				usercred = usercred_obj.credit
-				context["credits"] = usercred
+				# usercred_obj = get_object_or_404(UserCredit, user=user)
+				# usercred = usercred_obj.credit
+				# context["credits"] = usercred
 
 
 				#retrieve when the user has subcription for document
-				imgsub = get_object_or_404(ImageSubscription, user=user)
-				imgsubenddate = imgsub.subenddate
+				# imgsub = get_object_or_404(ImageSubscription, user=user)
+				# imgsubenddate = imgsub.subenddate
 
-				if imgsubenddate > todate:
-					context["imgenddate"] = imgsubenddate
-				else:
-					context["imgenddate"] = "Expired"
+				# if imgsubenddate > todate:
+				# 	context["imgenddate"] = imgsubenddate
+				# else:
+				# 	context["imgenddate"] = "Expired"
 
 
 				#retrieve when the user has subcription for analytics
-				analsub = get_object_or_404(AnalyticsSubscription, user=user)
-				analsubenddate = analsub.subenddate
+				# analsub = get_object_or_404(AnalyticsSubscription, user=user)
+				# analsubenddate = analsub.subenddate
 
-				if analsubenddate > todate:
-					context["analenddate"] = analsubenddate
-				else:
-					context["analenddate"] = "Expired"
+				# if analsubenddate > todate:
+				# 	context["analenddate"] = analsubenddate
+				# else:
+				# 	context["analenddate"] = "Expired"
 
 
 				#count when does the user subcribed to advertising
@@ -165,9 +165,9 @@ class HomeView(TemplateView):
 				user = self.request.user
 
 				#retrieve the number of credits the user has
-				usercred_obj = get_object_or_404(UserCredit, user=user)
-				usercred = usercred_obj.credit
-				context["credits"] = usercred
+				# usercred_obj = get_object_or_404(UserCredit, user=user)
+				# usercred = usercred_obj.credit
+				# context["credits"] = usercred
 
 
 				#retrieve when the user has subcription for BI

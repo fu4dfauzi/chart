@@ -2,9 +2,9 @@ from django.shortcuts import render, render_to_response
 from django.http import JsonResponse
 from django.views.generic import TemplateView, View, FormView
 from tags.models import ViewTeacherRecord, SearchWordTeacherRecord
-from orders.models import Order
+# from orders.models import Order
 
-from home.forms import OrderChartForm
+# from home.forms import OrderChartForm
 from django.contrib.auth.models import User
 from datetime import date
 import datetime
@@ -14,6 +14,11 @@ from django.db.models import Q
 
 
 
+
+# startTime = datetime.now()
+# print datetime.now() - startTime
+
+# http://127.0.0.1:8000/teacherchart/
 
 def json_serial(obj):
 	"""JSON serializer for objects not serializable by default json code"""
@@ -27,7 +32,14 @@ def json_serial(obj):
 
 class TeacherChart(View):
 
+	# startTime = datetime.now()
+
+	
+
 	def get(self, request):
+
+		startTime = datetime.datetime.now()
+
 		template = 'tcharts.html'
 
 		enddate = datetime.datetime.now()
@@ -164,97 +176,101 @@ class TeacherChart(View):
 		except:
 			context["dataw"] = json.dumps(swdf)
 
+		# print datetime.now() - startTime
+
+		print datetime.datetime.now() - startTime
+
 
 		return render(request, template, context)
 
 
 
 
-#This shit is still work in progress
-class StudentChart(FormView):
-	form_class = OrderChartForm
-	template_name = 'scharts.html'
+# #This shit is still work in progress
+# class StudentChart(FormView):
+# 	form_class = OrderChartForm
+# 	template_name = 'scharts.html'
 
 
-	# def get(self, request):
-	# 	template = 'tcharts.html'
-	# 	df = Order.objects.filter()
+# 	# def get(self, request):
+# 	# 	template = 'tcharts.html'
+# 	# 	df = Order.objects.filter()
 
-	# 	context = {
-	# 		# 'datab': json.dumps(dfb),
-	# 		# 'datal': json.dumps(dfl),
-	# 		# 'datap': json.dumps(dfp)
-	# 	}
-	# 	return render(request, template, context)
+# 	# 	context = {
+# 	# 		# 'datab': json.dumps(dfb),
+# 	# 		# 'datal': json.dumps(dfl),
+# 	# 		# 'datap': json.dumps(dfp)
+# 	# 	}
+# 	# 	return render(request, template, context)
 
 
-	def get_context_data(self, **kwargs):
-		context = super(StudentChart, self).get_context_data(**kwargs)
+# 	def get_context_data(self, **kwargs):
+# 		context = super(StudentChart, self).get_context_data(**kwargs)
 
-		enddate = datetime.datetime.now()
-		tdelta = datetime.timedelta(days=5)
-		startdate = enddate - tdelta
-		startdate = startdate.date()
+# 		enddate = datetime.datetime.now()
+# 		tdelta = datetime.timedelta(days=5)
+# 		startdate = enddate - tdelta
+# 		startdate = startdate.date()
 		
-		qs = Order.objects.filter().distinct()
+# 		qs = Order.objects.filter().distinct()
 
-		subject_1 = self.request.GET.get("subject_1")
-		subject_2 = self.request.GET.get("subject_2")
-		subject_3 = self.request.GET.get("subject_3")
-		level_type = self.request.GET.get("level")
-		educational_level = self.request.GET.getlist("educational_level")
-		expertise_type = self.request.GET.getlist("expertise_type")
-		minimum_years = self.request.GET.get("minimum_years")
-		group_tuition = self.request.GET.get("group_tuition")
+# 		subject_1 = self.request.GET.get("subject_1")
+# 		subject_2 = self.request.GET.get("subject_2")
+# 		subject_3 = self.request.GET.get("subject_3")
+# 		level_type = self.request.GET.get("level")
+# 		educational_level = self.request.GET.getlist("educational_level")
+# 		expertise_type = self.request.GET.getlist("expertise_type")
+# 		minimum_years = self.request.GET.get("minimum_years")
+# 		group_tuition = self.request.GET.get("group_tuition")
 
-		if subject_1:
-			subject = subject_1
-		elif subject_2:
-			subject = subject_2
-		else:
-			subject = subject_3
+# 		if subject_1:
+# 			subject = subject_1
+# 		elif subject_2:
+# 			subject = subject_2
+# 		else:
+# 			subject = subject_3
 
-		try:
-			if subject and level_type:
-				qs = qs.filter(
-					Q(subject=subject, level=level_type)
-				).distinct()
-			# if educational_level:
-			# 	qs = qs.filter(educational_level__in=educational_level)
-			# if expertise_type:
-			# 	qs = qs.filter(expertise_type__in=expertise_type)
-			# if minimum_years and not minimum_years == '0':
-			# 	qs = qs.filter(years_of_experience__gte=minimum_years)
-			if group_tuition:
-				qs = qs.filter(group_tuition=True)
+# 		try:
+# 			if subject and level_type:
+# 				qs = qs.filter(
+# 					Q(subject=subject, level=level_type)
+# 				).distinct()
+# 			# if educational_level:
+# 			# 	qs = qs.filter(educational_level__in=educational_level)
+# 			# if expertise_type:
+# 			# 	qs = qs.filter(expertise_type__in=expertise_type)
+# 			# if minimum_years and not minimum_years == '0':
+# 			# 	qs = qs.filter(years_of_experience__gte=minimum_years)
+# 			if group_tuition:
+# 				qs = qs.filter(group_tuition=True)
 
-			qs = qs.distinct()
+# 			qs = qs.distinct()
 
-			qs = qs.filter(date__range=[startdate, enddate], teacherorder=True, studentorder=True)
-
-
-
-		except:
-			pass
+# 			qs = qs.filter(date__range=[startdate, enddate], teacherorder=True, studentorder=True)
 
 
-		return context
+
+# 		except:
+# 			pass
 
 
-	def get_initial(self):
-		if not self.request.GET.get('submit'):
-			return self.initial.clear()
-		else:
-			self.initial.clear()
-			for key in self.request.GET:
-				try:
-					if key == "submit":
-						pass
-					else:
-						self.initial[key] = self.request.GET[key]
-				except KeyError:
-					pass
-			return self.initial.copy()
+# 		return context
+
+
+# 	def get_initial(self):
+# 		if not self.request.GET.get('submit'):
+# 			return self.initial.clear()
+# 		else:
+# 			self.initial.clear()
+# 			for key in self.request.GET:
+# 				try:
+# 					if key == "submit":
+# 						pass
+# 					else:
+# 						self.initial[key] = self.request.GET[key]
+# 				except KeyError:
+# 					pass
+# 			return self.initial.copy()
 
 
 

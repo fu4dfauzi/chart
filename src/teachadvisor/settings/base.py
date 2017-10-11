@@ -80,13 +80,13 @@ INSTALLED_APPS = [
     'teacher',
     'opening',
     'variables',
-    'messaging',
-    'orders',
-    'orderreview',
-    'billing',
-    'mixins',
+    # 'messaging',
+    # 'orders',
+    # 'orderreview',
+    # 'billing',
+    # 'mixins',
     'tags',
-    'notifications',
+    # 'notifications',
 
 
 #necessary for django allauth
@@ -118,10 +118,10 @@ AUTHENTICATION_BACKENDS = (
 # necessary for django allauth
 # ACCOUNT_AUTHENTICATION_METHOD ="username" | "email" | "username_email"
 ACCOUNT_AUTHENTICATION_METHOD ="username_email"
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
-ACCOUNT_EMAIL_VERIFICATION ="mandatory"
-ACCOUNT_UNIQUE_EMAIL =True
+# ACCOUNT_EMAIL_REQUIRED=True
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+# ACCOUNT_EMAIL_VERIFICATION ="mandatory"
+# ACCOUNT_UNIQUE_EMAIL =True
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION =True
 LOGIN_REDIRECT_URL='/'
 

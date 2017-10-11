@@ -6,10 +6,10 @@ from django.shortcuts import get_object_or_404
 from teacher.models import Teacher
 from student.models import Student
 from opening.models import Opening
-from orders.models import Order
-from messaging.models import Message
+# from orders.models import Order
+# from messaging.models import Message
 from tags.models import BlockUser
-from billing.models import UserCredit, CreditToCash, Transaction
+# from billing.models import UserCredit, CreditToCash, Transaction
 from django.contrib import messages
 
 # from sellers.mixins import SellerAccountMixin

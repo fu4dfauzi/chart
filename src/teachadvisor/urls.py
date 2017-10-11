@@ -20,18 +20,18 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from home.views import HomeView, PromotionView, ContactView, TermsAndConditionView, DisclaimerView, PrivacyPolicyView, RefundPolicyView, FAQView, CSupportView, TutorialsView, CareersView, PressView, PartnershipsView, Test
-from home.charts import StudentChart, TeacherChart
+from home.charts import TeacherChart #StudentChart,
 
 from teacher.views import TeacherCreate, TeacherUpdate, TeacherList, TeacherDetail, FavTeacherList
 from opening.views import OpeningCreate, OpeningList, OpeningUpdate, OpeningDetail, FavOpeningList, POpeningList, POpeningListInactive
 from student.views import StudentCreate, StudentUpdate, StudentList, StudentDetail
-from messaging.views import PostMessageView, MessageDetailView, OpeningSelectMsg, Oselectmsgc, Oselectmsgw, BlockSub
-from messaging.views import MessageListViewAll, MessageListViewMsg, MessageListViewPpl, MessageListViewWip, MessageListViewDon
+# from messaging.views import PostMessageView, MessageDetailView, OpeningSelectMsg, Oselectmsgc, Oselectmsgw, BlockSub
+# from messaging.views import MessageListViewAll, MessageListViewMsg, MessageListViewPpl, MessageListViewWip, MessageListViewDon
 from tags.views import FavTeacherSub, FavOpeningSub
-from orders.views import Accept, AcceptConf, OrderDetail, OrderDetailView, Withdraw, WithConf, OpeningConfirmAppOff, AppOffConf#, OpeningConfirmRej, RejectMsg
-from orderreview.views import OrderCancelReview, OrderCompleteReview, Finish, RecordMsg, ReviewListView, ReviewDetailView, ReviewList, OrderCompleteConfirm, ReviewDetail
-from billing.views import ImageSub, AddCredits, CheckOut, CheckOutFinal, Invoice, ImageSub, FeatureSub, AnalyticsSub, StudentBISub
-from notifications.views import allin, read, get_notifications_ajax, MsgCountView
+# from orders.views import Accept, AcceptConf, OrderDetail, OrderDetailView, Withdraw, WithConf, OpeningConfirmAppOff, AppOffConf#, OpeningConfirmRej, RejectMsg
+# from orderreview.views import OrderCancelReview, OrderCompleteReview, Finish, RecordMsg, ReviewListView, ReviewDetailView, ReviewList, OrderCompleteConfirm, ReviewDetail
+# from billing.views import ImageSub, AddCredits, CheckOut, CheckOutFinal, Invoice, ImageSub, FeatureSub, AnalyticsSub, StudentBISub
+# from notifications.views import allin, read, get_notifications_ajax, MsgCountView
 
 
 urlpatterns = [
@@ -39,8 +39,9 @@ urlpatterns = [
 
     url(r'^accounts/',include('allauth.urls')),
     url(r'^$', HomeView.as_view(), name='Home'),
+
     url(r'^contact/$', ContactView.as_view(), name='Contact'),
-    url(r'^promotions/$', PromotionView.as_view(), name='Promotions'),
+    # url(r'^promotions/$', PromotionView.as_view(), name='Promotions'),
 
     url(r'^termsandconditions/$', TermsAndConditionView.as_view(), name='TermsAndCondition'),
     url(r'^disclaimer/$', DisclaimerView.as_view(), name='Disclaimer'),
@@ -57,18 +58,18 @@ urlpatterns = [
 
 
 
-    url(r'^test/$', Test, name='Test'),
+    # url(r'^test/$', Test, name='Test'),
 
-    #billing and subscription
-    url(r'^billing/imagesub/$', ImageSub.as_view(), name='ImageSub'),
-    url(r'^billing/analyticssub/$', AnalyticsSub.as_view(), name='AnalyticsSub'),
-    url(r'^billing/studentbisub/$', StudentBISub.as_view(), name='StudentBISub'),
-    url(r'^billing/featuresub/$', FeatureSub.as_view(), name='FeatureSub'),
-    url(r'^billing/creditadd/$', AddCredits.as_view(), name='AddCredits'),
-    url(r'^billing/checkout/$', CheckOut.as_view(), name='CheckOut'),
-    url(r'^billing/checkout/final$', CheckOutFinal.as_view(), name='CheckOutFinal'),
-    url(r'^billing/checkout/invoice$', Invoice.as_view(), name='Invoice'),
-    url(r'^billing/subscription/$', ImageSub.as_view(), name='ImageSub'),
+    # #billing and subscription
+    # url(r'^billing/imagesub/$', ImageSub.as_view(), name='ImageSub'),
+    # url(r'^billing/analyticssub/$', AnalyticsSub.as_view(), name='AnalyticsSub'),
+    # url(r'^billing/studentbisub/$', StudentBISub.as_view(), name='StudentBISub'),
+    # url(r'^billing/featuresub/$', FeatureSub.as_view(), name='FeatureSub'),
+    # url(r'^billing/creditadd/$', AddCredits.as_view(), name='AddCredits'),
+    # url(r'^billing/checkout/$', CheckOut.as_view(), name='CheckOut'),
+    # url(r'^billing/checkout/final$', CheckOutFinal.as_view(), name='CheckOutFinal'),
+    # url(r'^billing/checkout/invoice$', Invoice.as_view(), name='Invoice'),
+    # url(r'^billing/subscription/$', ImageSub.as_view(), name='ImageSub'),
 
     #worker details
     url(r'^teacher/add/$', TeacherCreate.as_view(), name='TeacherCreate'),
@@ -92,76 +93,76 @@ urlpatterns = [
     url(r'^popenings/$', POpeningList.as_view(), name='POpeningList'),
     url(r'^popeningsinact/$', POpeningListInactive.as_view(), name='POpeningListInactive'),
 
-    #messaging
-    url(r'^messaging/$', PostMessageView.as_view(), name='Messaging'),
-    url(r'^messagelistall/$', MessageListViewAll.as_view(), name='MessageListViewAll'),
-    url(r'^messagelistmsg/$', MessageListViewMsg.as_view(), name='MessageListViewMsg'),
-    url(r'^messagelistppl/$', MessageListViewPpl.as_view(), name='MessageListViewPpl'),
-    url(r'^messagelistwip/$', MessageListViewWip.as_view(), name='MessageListViewWip'),
-    url(r'^messagelistdon/$', MessageListViewDon.as_view(), name='MessageListViewDon'),
+    # #messaging
+    # url(r'^messaging/$', PostMessageView.as_view(), name='Messaging'),
+    # url(r'^messagelistall/$', MessageListViewAll.as_view(), name='MessageListViewAll'),
+    # url(r'^messagelistmsg/$', MessageListViewMsg.as_view(), name='MessageListViewMsg'),
+    # url(r'^messagelistppl/$', MessageListViewPpl.as_view(), name='MessageListViewPpl'),
+    # url(r'^messagelistwip/$', MessageListViewWip.as_view(), name='MessageListViewWip'),
+    # url(r'^messagelistdon/$', MessageListViewDon.as_view(), name='MessageListViewDon'),
 
 
-    url(r'^messagedetail/(?P<pk>[0-9]+)/$', MessageDetailView.as_view(), name='MessageDetail'),
+    # url(r'^messagedetail/(?P<pk>[0-9]+)/$', MessageDetailView.as_view(), name='MessageDetail'),
 
-    #favoriting openings or teacher
-    url(r'^teacher/(?P<pk>[0-9]+)/FavTeacherSub$', FavTeacherSub),
-    url(r'^opening/(?P<pk>[0-9]+)/FavOpeningSub$', FavOpeningSub),
+    # #favoriting openings or teacher
+    # url(r'^teacher/(?P<pk>[0-9]+)/FavTeacherSub$', FavTeacherSub),
+    # url(r'^opening/(?P<pk>[0-9]+)/FavOpeningSub$', FavOpeningSub),
 
-    #favorite lists
-    url(r'^teacher/favteacherlist$', FavTeacherList.as_view(), name='FavTeacherList'),
-    url(r'^opening/favopeninglist$', FavOpeningList.as_view(), name='FavOpeningList'),
+    # #favorite lists
+    # url(r'^teacher/favteacherlist$', FavTeacherList.as_view(), name='FavTeacherList'),
+    # url(r'^opening/favopeninglist$', FavOpeningList.as_view(), name='FavOpeningList'),
 
-    #selecting opening to message for student
-    url(r'^openingselectmsg/$', OpeningSelectMsg.as_view(), name='OpeningSelectMsg'),
-    url(r'^openingselectmsg/Oselectmsgc$', Oselectmsgc, name='Oselectmsgc'),
+    # #selecting opening to message for student
+    # url(r'^openingselectmsg/$', OpeningSelectMsg.as_view(), name='OpeningSelectMsg'),
+    # url(r'^openingselectmsg/Oselectmsgc$', Oselectmsgc, name='Oselectmsgc'),
 
-    #selecting opening to message for teacher
-    url(r'^opening/(?P<pk>[0-9]+)/Oselectmsgw$',Oselectmsgw),
-    url(r'^messagedetail/(?P<pk>[0-9]+)/appoffconf$', AppOffConf, name='AppOffConf'),
-    url(r'^opening/appoffconfirm$', OpeningConfirmAppOff.as_view(), name='OpeningConfirmAppOff'),
+    # #selecting opening to message for teacher
+    # url(r'^opening/(?P<pk>[0-9]+)/Oselectmsgw$',Oselectmsgw),
+    # url(r'^messagedetail/(?P<pk>[0-9]+)/appoffconf$', AppOffConf, name='AppOffConf'),
+    # url(r'^opening/appoffconfirm$', OpeningConfirmAppOff.as_view(), name='OpeningConfirmAppOff'),
 
-    #get acceptance
-    url(r'^messagedetail/(?P<pk>[0-9]+)/accconf$', AcceptConf, name='AcceptConf'),
-    url(r'^messagedetail/Accept$',Accept.as_view(), name='Accept'),
+    # #get acceptance
+    # url(r'^messagedetail/(?P<pk>[0-9]+)/accconf$', AcceptConf, name='AcceptConf'),
+    # url(r'^messagedetail/Accept$',Accept.as_view(), name='Accept'),
 
-    #withdraw proposal
-    url(r'^messagedetail/(?P<pk>[0-9]+)/withconf$', WithConf, name='WithConf'),
-    url(r'^opening/withdraw$', Withdraw.as_view(), name='Withdraw'),
+    # #withdraw proposal
+    # url(r'^messagedetail/(?P<pk>[0-9]+)/withconf$', WithConf, name='WithConf'),
+    # url(r'^opening/withdraw$', Withdraw.as_view(), name='Withdraw'),
     
-    #block and unblock users
-    url(r'^messagedetail/(?P<pk>[0-9]+)/blocksub$', BlockSub, name='BlockSub'),
+    # #block and unblock users
+    # url(r'^messagedetail/(?P<pk>[0-9]+)/blocksub$', BlockSub, name='BlockSub'),
 
 
-    #viewing orders
-    # url(r'^order/$', OrderListView.as_view(), name='OrderList'),
-    url(r'^order/detail/$', OrderDetail, name='OrderDetail'),
-    url(r'^order/detail/view$', OrderDetailView.as_view(), name='OrderDetailView'),
+    # #viewing orders
+    # # url(r'^order/$', OrderListView.as_view(), name='OrderList'),
+    # url(r'^order/detail/$', OrderDetail, name='OrderDetail'),
+    # url(r'^order/detail/view$', OrderDetailView.as_view(), name='OrderDetailView'),
 
-    #finish orders
-    url(r'^order/finish$', Finish, name='Finish'),
-    url(r'^order/completeconfirm$', OrderCompleteConfirm.as_view(), name='OrderCompleteConfirm'),
+    # #finish orders
+    # url(r'^order/finish$', Finish, name='Finish'),
+    # url(r'^order/completeconfirm$', OrderCompleteConfirm.as_view(), name='OrderCompleteConfirm'),
 
-    #completed or cancelled and ready for review    
-    url(r'^review/recordmsg$', RecordMsg, name='RecordMsg'),
-    url(r'^review/cancelreview/$', OrderCancelReview.as_view(), name='OrderCancelReview'),
-    url(r'^review/completereview/$', OrderCompleteReview.as_view(), name='OrderCompleteReview'),
+    # #completed or cancelled and ready for review    
+    # url(r'^review/recordmsg$', RecordMsg, name='RecordMsg'),
+    # url(r'^review/cancelreview/$', OrderCancelReview.as_view(), name='OrderCancelReview'),
+    # url(r'^review/completereview/$', OrderCompleteReview.as_view(), name='OrderCompleteReview'),
 
-    #viewing reviews
-    url(r'^review/reviewlist$', ReviewList, name='ReviewList'),
-    url(r'^review/reviewlist/view$', ReviewListView.as_view(), name='ReviewListView'),
+    # #viewing reviews
+    # url(r'^review/reviewlist$', ReviewList, name='ReviewList'),
+    # url(r'^review/reviewlist/view$', ReviewListView.as_view(), name='ReviewListView'),
     
-    url(r'^review/reviewdetail/$', ReviewDetail, name='ReviewDetail'),
-    url(r'^review/reviewdetail/view$', ReviewDetailView.as_view(), name='ReviewDetailView'),
+    # url(r'^review/reviewdetail/$', ReviewDetail, name='ReviewDetail'),
+    # url(r'^review/reviewdetail/view$', ReviewDetailView.as_view(), name='ReviewDetailView'),
 
-    #notifications
-    url(r'^notifications/$', allin, name='notifications_all'),
-    url(r'^notifications/ajax/$', get_notifications_ajax, name='get_notifications_ajax'),
-    url(r'^notifications/(?P<id>\d+)/$', read, name='notifications_read'),
-    url(r'^notifications/count/$', MsgCountView.as_view(), name='msg_count'),
+    # #notifications
+    # url(r'^notifications/$', allin, name='notifications_all'),
+    # url(r'^notifications/ajax/$', get_notifications_ajax, name='get_notifications_ajax'),
+    # url(r'^notifications/(?P<id>\d+)/$', read, name='notifications_read'),
+    # url(r'^notifications/count/$', MsgCountView.as_view(), name='msg_count'),
 
     # url(r'^examplepiechart/$', ExamplePieChart.as_view(), name='ExamplePieChart'),
     url(r'^teacherchart/$', TeacherChart.as_view(), name='TeacherChart'),
-    url(r'^studentchart/$', StudentChart.as_view(), name='StudentChart'),
+    # url(r'^studentchart/$', StudentChart.as_view(), name='StudentChart'),
 
 
 ]

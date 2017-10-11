@@ -4,14 +4,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.views.generic import ListView, DetailView, TemplateView
 from teacher.models import Teacher
 from student.models import Student
-from orderreview.models import ReviewTeacher
+# from orderreview.models import ReviewTeacher
 from variables.models import Subject_Expertise, Level_Expertise
-from billing.models import UserCredit, ImageSubscription, AnalyticsSubscription, FeaturedUser_0, FeaturedUser_1
+# from billing.models import UserCredit, ImageSubscription, AnalyticsSubscription, FeaturedUser_0, FeaturedUser_1
 from tags.models import TagTeacher, ViewTeacherNonUnique, SearchWordTeacherRecord, ViewTeacherUnique
 from teacher.forms import TeacherAddForm, TeacherEditForm, SearchTeacherForm
 from tags.models import ViewTeacherRecord
 from tags.views import FavTeacher
-from billing.control import creditstart
+# from billing.control import creditstart
 from mixins.mixins import UserChangeManagerMixin, LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.contrib import messages
@@ -48,7 +48,7 @@ class TeacherDetail(LoginRequiredMixin, DetailView):
         except:
             context["favteacher"] = 0
 
-        context["review"] = objw.reviewteacher_set.filter(cnc="Complete")
+        # context["review"] = objw.reviewteacher_set.filter(cnc="Complete")
         context["jobs"] = objw.get_job_count()
         context["score"] = objw.get_score()
         context["last_active"] = objw.get_last_active()
@@ -442,22 +442,22 @@ class FavTeacherList(ListView):
 
 
 
-class ReviewList(ListView):
-    model = ReviewTeacher
-    template_name = 'review_list.html'
-    paginate_by = 10
+# class ReviewList(ListView):
+#     model = ReviewTeacher
+#     template_name = 'review_list.html'
+#     paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super(ReviewList, self).get_context_data(**kwargs)
-        teacher_id = self.request.GET.get('teacher_id')
-        teacher = Teacher.objects.get(id = teacher_id)
-        context["Teacher_Name"] = str(teacher.last_name) + " " + str(teacher.first_name)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(ReviewList, self).get_context_data(**kwargs)
+#         teacher_id = self.request.GET.get('teacher_id')
+#         teacher = Teacher.objects.get(id = teacher_id)
+#         context["Teacher_Name"] = str(teacher.last_name) + " " + str(teacher.first_name)
+#         return context
 
-    def get_queryset(self, *args, **kwargs):
-        teacher_id = self.request.GET.get('teacher_id')
-        qs = super(ReviewList, self).get_queryset(**kwargs).filter(teacher=teacher_id, cnc="Complete").order_by("-id")
+#     def get_queryset(self, *args, **kwargs):
+#         teacher_id = self.request.GET.get('teacher_id')
+#         qs = super(ReviewList, self).get_queryset(**kwargs).filter(teacher=teacher_id, cnc="Complete").order_by("-id")
         
-        return qs
+#         return qs
 
 

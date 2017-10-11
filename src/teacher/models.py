@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from billing.models import ImageSubscription
+# from billing.models import ImageSubscription
 from variables.models import Country, Educational_Level, Education, Subject_Expertise, Level_Expertise, Region, Expertise_Type, Education_School
 from django.db import models
 from django.db.models import Avg, Max
@@ -92,10 +92,10 @@ class Teacher(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL)
 	function = models.CharField(max_length=20, null=True, blank=True)
 
-	title = models.CharField(max_length=120)
-	first_name = models.CharField(max_length=60)
-	last_name = models.CharField(max_length=60)
-	contact = models.CharField(max_length=20, validators=[phone_regex], blank=False, null=False) # validators should be a list
+	title = models.CharField(max_length=120, blank=True, null=True)
+	first_name = models.CharField(max_length=60, blank=True, null=True)
+	last_name = models.CharField(max_length=60, blank=True, null=True)
+	contact = models.CharField(max_length=20, blank=True, null=True) # validators should be a list
 	birth_date = models.DateField(blank=True, null=True)
 	gender = models.CharField(max_length=6, choices=gender, blank=True, null=True)
 
@@ -110,11 +110,11 @@ class Teacher(models.Model):
 	third_subject = models.ForeignKey(Subject_Expertise, on_delete=models.CASCADE, null=True, blank=True, related_name="subject3")
 	third_level = models.ManyToManyField(Level_Expertise, blank=True, related_name="level3")
 
-	educational_level = models.ManyToManyField(Educational_Level)
-	education = models.ManyToManyField(Education)
-	education_school = models.ManyToManyField(Education_School)
+	educational_level = models.ManyToManyField(Educational_Level, blank=True, null=True)
+	education = models.ManyToManyField(Education, blank=True, null=True)
+	education_school = models.ManyToManyField(Education_School, blank=True, null=True)
 	expertise_type = models.ForeignKey(Expertise_Type, on_delete=models.CASCADE, null=True, blank=True)
-	years_of_experience = models.PositiveIntegerField(null=False, blank=False)
+	years_of_experience = models.PositiveIntegerField(null=True, blank=True)
 	description = models.TextField(null=True, blank=True)
 	group_tuition = models.BooleanField(default=False)
 	website_url = models.CharField(max_length=60, null=True, blank=True)
@@ -122,7 +122,7 @@ class Teacher(models.Model):
 	salary_expectation = models.DecimalField(decimal_places=0, max_digits=3, null=True, blank=True)
 	salary_negotiable = models.BooleanField(default=False)
 
-	region = models.ManyToManyField(Region)
+	region = models.ManyToManyField(Region, blank=True, null=True)
 	postal_code = models.CharField(max_length=6, null=True, blank=True)
 
 	# street = models.CharField(max_length=120, null=True, blank=True)
